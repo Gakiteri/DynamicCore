@@ -21,6 +21,12 @@ public class MngConf {
             });
         });
 
+        config.getMapList("database.config").forEach(set -> {
+            set.forEach((key, value) -> {
+                Variables.configSql.put((String) key, value);
+            });
+        });
+
     }
 
 

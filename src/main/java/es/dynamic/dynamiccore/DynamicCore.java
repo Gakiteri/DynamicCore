@@ -8,6 +8,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.sql.SQLException;
+
 public final class DynamicCore extends JavaPlugin {
 
     @Override
@@ -36,7 +38,14 @@ public final class DynamicCore extends JavaPlugin {
         saveDefaultConfig();
         new MngConf().load();
 
-
+        try {
+            MngSql sql = new MngSql();
+            sql.initDatabase();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         // Plugin startup logic
         getLogger().info("DynamicCore plugin initialised");
     }
