@@ -1,12 +1,25 @@
 package es.dynamic.dynamiccore.data;
 
+import java.util.UUID;
+
 public class DataPlayer {
 
+    private UUID uuid;
     private String name;
-    private int time;
+    private long time;
 
-    public DataPlayer (int time) {
-        this.time = time;
+    public DataPlayer(UUID uuid) {
+
+        this.uuid = uuid;
+
+        new MngSql(). // check for record -> send uuid
+
+    }
+
+    /** SET ALL **/
+    public void setAll(DataPlayer val) {
+        name = val.getName();
+        time = val.getTime();
     }
 
 
@@ -20,9 +33,20 @@ public class DataPlayer {
 
     /** TIME **/
     public void updateTime() {
-        time = time + 1;
+
+        long timeNow;
+
+        new MngSql().
+
+        // desde la conexion, acctualiza el tiempo "val"
+
     }
-    public int getTime() {
+    public long getTime() {
+
+        // consulta a base y devuelve time
+
+
+
         return time;
     }
 

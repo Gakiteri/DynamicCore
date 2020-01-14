@@ -17,7 +17,7 @@ public class MngConf {
         // Load players playtime
         config.getMapList("players.playtime").forEach(set -> {
             set.forEach((player, time) -> {
-                Variables.playerData.put((String) player, new DataPlayer(Integer.parseInt((String) time)));
+                Variables.playerData.put((String) player, new DataPlayer());
             });
         });
 
