@@ -1,0 +1,5 @@
+name: DynamicCore
+version: ${project.version}
+main: es.dynamic.dynamiccore.Dynamiccore
+api-version: 1.13
+authors: [Gakiteri, FoxkDev]
