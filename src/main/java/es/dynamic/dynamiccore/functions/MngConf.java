@@ -5,6 +5,8 @@ import es.dynamic.dynamiccore.data.DataPlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
+import java.util.UUID;
+
 import static org.bukkit.Bukkit.getPluginManager;
 
 public class MngConf {
