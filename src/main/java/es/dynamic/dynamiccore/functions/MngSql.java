@@ -50,7 +50,7 @@ public class MngSql {
                 "  `pvp` int NOT NULL,\n" +
                 "  `role` varchar(50) NOT NULL,\n" +
                 "  `lastTime` datetime NOT NULL,\n" +
-                "  `time_online` int NOT NULL\n" +
+                "  `timeOnline` int NOT NULL\n" +
                 "  `balance` float NOT NULL \n" +
                 ") ENGINE='InnoDB';";
         this.update(queryInitial);
