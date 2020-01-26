@@ -62,6 +62,7 @@ public class DataPlayer {
         long diff = this.lastTime.getTime() - (new Date()).getTime();
         long seconds = diff / 1000 % 60;
         this.timeOnline = this.timeOnline + (int) seconds;
+        this.lastTime = new Date();
 
     }
     public void updateData() throws SQLException {
