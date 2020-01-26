@@ -17,12 +17,6 @@ public class MngConf {
     public void load() {
 
         // Load players playtime
-        config.getMapList("players.playtime").forEach(set -> {
-            set.forEach((player, time) -> {
-                Variables.playerData.put((String) player, new DataPlayer());
-            });
-        });
-
         config.getMapList("database.config").forEach(set -> {
             set.forEach((key, value) -> {
                 Variables.configSql.put((String) key, value);
@@ -33,11 +27,6 @@ public class MngConf {
 
 
     public void save() {
-
-        // Add players playtime
-        Variables.playerData.forEach((player, dataset) -> {
-            config.set("players.playtime." + player, dataset.getTime());
-        });
 
         // Saves to file
         plugin.saveConfig();

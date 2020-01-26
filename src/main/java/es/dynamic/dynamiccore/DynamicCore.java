@@ -27,8 +27,7 @@ public final class DynamicCore extends JavaPlugin {
         pluginManager.registerEvents(new OnJoin(), this);
 
         /** TASK REGISTRATION **/
-        BukkitTask UpdatePlaytime = new UpdatePlaytime(this).runTaskTimer(this, 0L, 20L);
-
+        BukkitTask UpdateUser = new UpdateUser(this).runTaskTimer(this, 0L, 20L);
 
         /** GET PLUGIN DIRECTORY **/
         Variables.dirPlugin = MngFile.path(getDataFolder());

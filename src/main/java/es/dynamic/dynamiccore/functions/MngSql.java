@@ -57,7 +57,6 @@ public class MngSql {
     }
 
     public ResultSet query(String query) throws SQLException {
-
         return this.getStatement().executeQuery(query);
     }
 

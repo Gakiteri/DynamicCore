@@ -25,55 +25,65 @@ public class DataPlayer {
         this.mngSql = new MngSql();
         this.uuid = player.getUniqueId();
         this.username = player.getName();
-        this.status = "online";
-        this.pvp = true; //get from game?
-        this.role = "default"; //get from luckperms
-        this.lastTime = new Date();
-        this.timeOnline = 0;
-        this.balance = 0;
-        this.initPlayer();
 
-
+        this.getData();
     }
 
 
 
-    /** NAME **/
-
-    /** TIME **/
-    public void updateTime() {
-
-        long timeNow;
-
-        new MngSql().
-
-        // desde la conexion, acctualiza el tiempo "val"
+    public boolean getPvp() {
+        return this.pvp;
+    }
+    public void setPvp(Boolean pvp) {
+        this.pvp = pvp;
+    }
+    public String getRole() {
+        return this.role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
+    public int getBalance() {
+        return this.balance;
+    }
+    public void setBalance(int balance) throws SQLException {
+        this.balance = balance;
+    }
+    public Date getLastTime() {
+        return this.lastTime;
+    }
+    public void setLastTime(Date date) throws SQLException {
+        this.lastTime = date;
+    }
+    public int getTimeOnline() {
+        return this.timeOnline;
+    }
+    public void setTimeOnline() {
+        long diff = this.lastTime.getTime() - (new Date()).getTime();
+        long seconds = diff / 1000 % 60;
+        this.timeOnline = this.timeOnline + (int) seconds;
 
     }
-    public long getTime() {
-
-        // consulta a base y devuelve time
-
-
-
-        return time;
+    public void updateData() throws SQLException {
+        String query = "UPDATE players SET (status, pvp, role, lastTime, timeOnline, balance) VALUES (%s, %d, %s, %s, %s, %d)";
+        mngSql.update(String.format(query,
+                this.status,
+                this.pvp,
+                this.role,
+                this.lastTime.toString(),
+                this.timeOnline,
+                this.balance
+        ));
     }
-
-    public Date getLastTime() throws SQLException, ClassNotFoundException {
-        ResultSet result = mngSql.query("SELECT lastTime FROM players WHERE uuid = " + this.uuid);
-        return result.getDate("lastTime");
-    }
-    public int getTimeOnline() throws SQLException, ClassNotFoundException {
-        ResultSet result = mngSql.query("SELECT timeOnline FROM players WHERE uuid = " + this.uuid);
-        return result.getInt("timeOnline");
-    }
-
-    private void initPlayer() throws SQLException, ClassNotFoundException {
-
+    private void getData() throws SQLException, ClassNotFoundException {
         ResultSet result = mngSql.query("SELECT * FROM players WHERE uuid = " + this.uuid);
-        //get
         if(result.getFetchSize() == 0) {
-
+            this.status = "online";
+            this.pvp = true; //get from game?
+            this.role = "default"; //get from luckperms
+            this.lastTime = new Date();
+            this.timeOnline = 0;
+            this.balance = 0;
             String query = "INSERT INTO players (uuid, username, status, pvp, role, lastTime, timeOnline, balance) VALUES (%d, %s, %s, %d, %s, %s, %s, %d)";
             mngSql.update(String.format(query,
                     this.uuid,
@@ -83,11 +93,17 @@ public class DataPlayer {
                     this.role,
                     this.lastTime.toString(),
                     this.timeOnline,
-                    this.balance));
+                    this.balance
+            ));
         } else {
+              this.status = result.getString(" status");
+              this.pvp = result.getBoolean("pvp");
+              this.role = result.getString("role");
+              this.lastTime = result.getDate("lastTime");
+              this.timeOnline = result.getInt("timeOnline");
+              this.balance = result.getInt("balance");
 
         }
-        mngSql.getStatement().close();
     }
 
 }
