@@ -1,6 +1,5 @@
 package es.dynamic.dynamiccore;
 
-import es.dynamic.dynamiccore.data.DataPlayer;
 
 import java.io.File;
 import java.util.HashMap;

@@ -22,7 +22,6 @@ public final class DynamicCore extends JavaPlugin {
         /** COMMAND REGISTRATION **/
 //        this.getCommand("get").setExecutor(new CmdGet());
 
-
         /** EVENT REGISTRATION **/
         pluginManager.registerEvents(new OnJoin(), this);
 
